@@ -10,13 +10,15 @@ class AccountSerialization(serializers.ModelSerializer):
     class Meta:
         model = Account
         fields='__all__'
+        #to make password invisable
+        extra_kwargs = {'password':{'write_only':True}, 'required':True}
 
-class InvestorSerialization(serializers.ModelSerializer):
+class InvestorSerialization(AccountSerialization):
     class Meta:
         model = Investor
         fields='__all__'
 
-class borrowerSerialization(serializers.ModelSerializer):
+class BorrowerSerialization(serializers.ModelSerializer):
     class Meta:
         model = Borrower
         fields='__all__'

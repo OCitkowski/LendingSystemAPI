@@ -9,5 +9,5 @@ class OfferAdmin(admin.ModelAdmin):
 admin.site.register(Offer,OfferAdmin)
 
 class LoanAdmin(admin.ModelAdmin):
-    readonly_fields = ['loan_amount','final_total_amount']
+    readonly_fields = ['loan_amount','final_total_amount','created_at',]
 admin.site.register(Loan,LoanAdmin)

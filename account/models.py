@@ -65,7 +65,9 @@ class Account(AbstractBaseUser):
 
 class Investor(models.Model):
     user = models.OneToOneField(Account, on_delete=models.CASCADE, primary_key=True)
-    is_investor       = models.BooleanField(default=True)
+    def get_user(self):
+        return self.user.is_investor == True
+    is_investor       = property(get_user)
     investor_email  = models.EmailField(null=True, blank=True)
     invest_money    = models.IntegerField(default=0,null=False,blank=False)
     # your_requests   = models.ForeignKey(RequestsLoan, on_delete=models.CASCADE, null=True,blank=True)
@@ -76,7 +78,9 @@ class Investor(models.Model):
 
 class Borrower(models.Model):
     user = models.OneToOneField(Account, on_delete=models.CASCADE, primary_key=True)
-    is_borrower       = models.BooleanField(default=True)
+    def get_user(self):
+        return self.user.is_borrower
+    is_borrower       = property(get_user)
     borrower_email  = models.EmailField(null=True, blank=True)
     # loans           = models.ForeignKey(Loan, on_delete=models.CASCADE)
     # offers          = models.ForeignKey(Offer, on_delete=models.CASCADE, null=True,blank=True )
@@ -89,3 +93,4 @@ class Borrower(models.Model):
 def create_auth_token(sender, instance=None, created=False, **kwargs):
     if created:
         Token.objects.create(user=instance)
+

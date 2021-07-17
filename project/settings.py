@@ -46,7 +46,6 @@ INSTALLED_APPS = [
     # my apps   
     'account',
     'loans',
-    'profiles',
 
 ]
 REST_FRAMEWORK = {
